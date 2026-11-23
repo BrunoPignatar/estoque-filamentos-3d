@@ -111,3 +111,22 @@ a {
 .voltar {
   padding: 10px 0;
 }
+
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.acoes form {
+  display: inline;
+}
+
+.excluir {
+  background-color: #c0392b;
+  padding: 6px 12px;
+}
+
+.excluir:hover {
+  background-color: #962d22;
+}

@@ -88,4 +88,14 @@ router.post('/itens/:id/editar', function(req, res, next) {
     });
 });
 
+router.post('/itens/:id/excluir', function(req, res, next) {
+  db.query('DELETE FROM filamentos WHERE id = ?', [req.params.id])
+    .then(function() {
+      res.redirect('/');
+    })
+    .catch(function(err) {
+      next(err);
+    });
+});
+
 module.exports = router;
