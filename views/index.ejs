@@ -15,6 +15,9 @@
     <main>
       <section class="card">
         <h2>Cadastrar filamento</h2>
+        <% if (erro) { %>
+          <p class="erro"><%= erro %></p>
+        <% } %>
         <form action="/itens" method="POST">
           <div class="campo">
             <label for="marca">Marca</label>
