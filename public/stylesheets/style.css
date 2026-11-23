@@ -103,3 +103,11 @@ tr:hover {
   padding: 10px;
   border-radius: 4px;
 }
+
+a {
+  color: #1f4e79;
+}
+
+.voltar {
+  padding: 10px 0;
+}
