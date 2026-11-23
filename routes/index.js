@@ -1,14 +1,31 @@
 var express = require('express');
 var router = express.Router();
-
-var filamentos = [
-  { id: 1, marca: 'Voolt3D', material: 'PLA', cor: 'Preto', peso: 1000, preco: 89.90 },
-  { id: 2, marca: '3D Fila', material: 'PETG', cor: 'Branco', peso: 1000, preco: 99.90 },
-  { id: 3, marca: 'Sethi3D', material: 'ABS', cor: 'Vermelho', peso: 500, preco: 54.90 }
-];
+var db = require('../config/db');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Estoque de Filamentos 3D', filamentos: filamentos });
+  db.query('SELECT * FROM filamentos ORDER BY id')
+    .then(function([filamentos]) {
+      res.render('index', { title: 'Estoque de Filamentos 3D', filamentos: filamentos });
+    })
+    .catch(function(err) {
+      next(err);
+    });
+});
+
+router.post('/itens', function(req, res, next) {
+  var marca = req.body.marca;
+  var material = req.body.material;
+  var cor = req.body.cor;
+  var peso = req.body.peso;
+  var preco = req.body.preco;
+
+  db.query('INSERT INTO filamentos (marca, material, cor, peso, preco) VALUES (?, ?, ?, ?, ?)', [marca, material, cor, peso, preco])
+    .then(function() {
+      res.redirect('/');
+    })
+    .catch(function(err) {
+      next(err);
+    });
 });
 
 module.exports = router;
